@@ -335,16 +335,3 @@ export interface AccountWithdrawalAddressResponse {
     address?: string | null;
   } | null;
 }
-
-export type DailyStatsResponse = Record<
-  string,
-  {
-    aggregate?: {
-      count?: number | null;
-      sum?: {
-        num_txs?: number | null;
-      } | null;
-    } | null;
-  }
->;
-

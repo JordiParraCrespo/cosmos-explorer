@@ -16,5 +16,4 @@ export interface DailyStats {
 
 export interface IChainStatsService {
   getChainStats(input: { priceDenom: string }): Promise<ChainStats>;
-  getDailyStats(): Promise<DailyStats[]>;
 }

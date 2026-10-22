@@ -1,6 +1,5 @@
 import {
   type ChainStats,
-  type DailyStats,
   type IBlockService,
   type IChainStatsService,
   type IValidatorService,
@@ -8,8 +7,8 @@ import {
 import { type Fetcher } from '@cosmos-explorer/utils';
 
 import { mapAverageBlockTime } from '../mappers';
-import { AVERAGE_BLOCK_TIME_QUERY, buildDailyStatsQuery } from '../queries';
-import type { AverageBlockTimeResponse, DailyStatsResponse } from '../types';
+import { AVERAGE_BLOCK_TIME_QUERY } from '../queries';
+import type { AverageBlockTimeResponse } from '../types';
 
 export class CallistoChainStatsService implements IChainStatsService {
   constructor(
@@ -39,31 +38,6 @@ export class CallistoChainStatsService implements IChainStatsService {
           ? validatorsResult.value
           : { active: 0, total: 0 },
     };
-  }
-
-  async getDailyStats(): Promise<DailyStats[]> {
-    const query = buildDailyStatsQuery();
-    const response = await this.fetcher.graphql<DailyStatsResponse>({
-      query,
-      operationName: 'DailyStats',
-    });
-
-    const now = new Date();
-    const result: DailyStats[] = [];
-
-    for (let i = 6; i >= 0; i--) {
-      const date = new Date(now);
-      date.setUTCDate(date.getUTCDate() - i);
-      date.setUTCHours(0, 0, 0, 0);
-
-      const dayData = response[`day_${i}`];
-      result.push({
-        date: date.toISOString().slice(0, 10),
-        transactions: dayData?.aggregate?.sum?.num_txs ?? 0,
-      });
-    }
-
-    return result;
   }
 
   private async getAverageBlockTime(): Promise<number | null> {
