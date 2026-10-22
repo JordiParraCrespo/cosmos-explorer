@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@cosmos-explorer/eslint-config": "workspace:^",
-    "eslint": "^9",
-    "typescript": "^5"
+    "eslint": "^9.39.5",
+    "typescript": "^5.9.3"
   }
 }
