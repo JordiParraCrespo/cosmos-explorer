@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { RawContentSection } from "@/components/proposal-content/shared/raw-content-section";
 import { ProposalVotesCard, ProposalVotesCardSkeleton } from "@/components/proposal-votes-card";
+import { ProposalVotesErrorBoundary } from "@/components/proposal-votes-error-boundary";
 import { ProposalDepositsCard, ProposalDepositsCardSkeleton } from "@/components/proposal-deposits-card";
 import { ProposalTimeline } from "@/components/proposal-timeline";
 import { ProposalVotingCard } from "@/components/proposal-voting-card";
@@ -135,9 +136,11 @@ export default async function ProposalDetailPage({
       <ProposalDetailsCard proposal={proposal} />
 
       {/* 3. Votes */}
-      <Suspense fallback={<ProposalVotesCardSkeleton />}>
-        <ProposalVotesCard proposalId={Number(id)} />
-      </Suspense>
+      <ProposalVotesErrorBoundary>
+        <Suspense fallback={<ProposalVotesCardSkeleton />}>
+          <ProposalVotesCard proposalId={Number(id)} />
+        </Suspense>
+      </ProposalVotesErrorBoundary>
 
       {/* 4. Raw content */}
       <RawContentSection content={proposal.content} />
