@@ -4,6 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@cosmos-explorer/ui/card";
+import type { ProposalVote } from "@cosmos-explorer/core";
 import { getServices } from "@/lib/services";
 import { ProposalVotesContent } from "@/components/proposal-votes-content";
 
@@ -17,11 +18,31 @@ export interface SerializableValidator {
   avatarUrl: string | null;
 }
 
+// Matches the anonymous row limit on proposal_vote in the Hasura metadata;
+// larger requests are silently truncated, so page through all votes.
+const VOTES_PAGE_SIZE = 100;
+
+async function getAllProposalVotes(proposalId: number): Promise<ProposalVote[]> {
+  const { proposalService } = getServices();
+  const votes: ProposalVote[] = [];
+
+  for (;;) {
+    const page = await proposalService.getProposalVotes(proposalId, {
+      limit: VOTES_PAGE_SIZE,
+      offset: votes.length,
+    });
+    votes.push(...page.votes);
+    if (page.votes.length < VOTES_PAGE_SIZE || votes.length >= page.total) {
+      return votes;
+    }
+  }
+}
+
 export async function ProposalVotesCard({ proposalId }: ProposalVotesCardProps) {
   const { proposalService } = getServices();
 
-  const [{ votes }, eligibleVoters] = await Promise.all([
-    proposalService.getProposalVotes(proposalId, { limit: 1000, offset: 0 }),
+  const [votes, eligibleVoters] = await Promise.all([
+    getAllProposalVotes(proposalId),
     proposalService.getProposalEligibleVoters(proposalId),
   ]);
 
