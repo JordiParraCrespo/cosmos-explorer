@@ -19,7 +19,7 @@ function parseBinaries(info: string | undefined): Record<string, string> | null 
   try {
     const parsed: unknown = JSON.parse(info);
     if (typeof parsed === "object" && parsed !== null && "binaries" in parsed) {
-      const binaries = (parsed as { binaries: unknown }).binaries;
+      const binaries = parsed.binaries;
       if (typeof binaries === "object" && binaries !== null) {
         return binaries as Record<string, string>;
       }

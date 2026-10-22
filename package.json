@@ -21,10 +21,10 @@
     "typecheck:packages": "npx turbo run typecheck --filter=\"./packages/**/*\" && echo '🔎 Check types packages completed'"
   },
   "devDependencies": {
-    "eslint": "^9",
-    "turbo": "^2"
+    "eslint": "^9.39.5",
+    "turbo": "^2.11.10"
   },
   "dependencies": {
-    "@tabler/icons-react": "^3.40.0"
+    "@tabler/icons-react": "^3.49.0"
   }
 }

@@ -11,7 +11,7 @@ function parseFeePayload(
     try {
       const parsed: unknown = JSON.parse(fee);
       if (typeof parsed === "object" && parsed !== null) {
-        return parsed as { amount?: unknown[]; gas_limit?: unknown };
+        return parsed;
       }
       return null;
     } catch {
@@ -20,7 +20,7 @@ function parseFeePayload(
   }
 
   if (typeof fee === "object") {
-    return fee as { amount?: unknown[]; gas_limit?: unknown };
+    return fee;
   }
 
   return null;
