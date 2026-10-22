@@ -17,8 +17,9 @@ Install the Hasura CLI (`curl -L https://github.com/hasura/graphql-engine/raw/st
 ```bash
 cd apps/callisto/hasura
 
-# local
-hasura metadata apply
+# local (admin secret from apps/callisto/.env, created by `make setup-env`)
+hasura metadata apply \
+  --admin-secret "$(grep '^HASURA_GRAPHQL_ADMIN_SECRET=' ../.env | cut -d= -f2-)"
 
 # remote
 hasura metadata apply \
