@@ -126,13 +126,13 @@ init-config:
 
 DB_EXEC := docker compose exec -T database psql -U user -d database
 
-db-schema-drop:
+db-schema-drop: setup-env
 	@echo "Dropping all tables..."
 	@$(DB_EXEC) -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 	@echo "All tables dropped"
 .PHONY: db-schema-drop
 
-db-schema-apply:
+db-schema-apply: setup-env
 	@echo "Applying schema files..."
 	@for f in $(sort $(wildcard database/schema/*.sql)); do \
 		echo "  Applying $$f..."; \
@@ -145,15 +145,15 @@ db-schema-reset: db-schema-drop db-schema-apply
 	@echo "Schema reset complete"
 .PHONY: db-schema-reset
 
-db-shell:
+db-shell: setup-env
 	@docker compose exec database psql -U user -d database
 .PHONY: db-shell
 
-db-tables:
+db-tables: setup-env
 	@$(DB_EXEC) -c "\dt"
 .PHONY: db-tables
 
-db-size:
+db-size: setup-env
 	@$(DB_EXEC) -c "SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname || '.' || tablename)) AS size FROM pg_tables WHERE schemaname = 'public' ORDER BY pg_total_relation_size(schemaname || '.' || tablename) DESC;"
 .PHONY: db-size
 
