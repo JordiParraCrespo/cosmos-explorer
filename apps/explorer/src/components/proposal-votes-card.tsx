@@ -19,7 +19,7 @@ export interface SerializableValidator {
 }
 
 // Matches the anonymous row limit on proposal_vote in the Hasura metadata;
-// larger requests are silently truncated, so page through all votes.
+// larger requests are silently truncated, so page until a short page.
 const VOTES_PAGE_SIZE = 100;
 
 async function getAllProposalVotes(proposalId: number): Promise<ProposalVote[]> {
@@ -31,8 +31,8 @@ async function getAllProposalVotes(proposalId: number): Promise<ProposalVote[]> 
       limit: VOTES_PAGE_SIZE,
       offset: votes.length,
     });
-    votes.push(...page.votes);
-    if (page.votes.length < VOTES_PAGE_SIZE || votes.length >= page.total) {
+    votes.push(...page);
+    if (page.length < VOTES_PAGE_SIZE) {
       return votes;
     }
   }
