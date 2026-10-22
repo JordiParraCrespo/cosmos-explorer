@@ -392,7 +392,7 @@ export const PROPOSAL_VOTES_QUERY = `
   query ProposalVotes($proposalId: Int!, $limit: Int = 25, $offset: Int = 0) {
     proposal_vote(
       where: { proposal_id: { _eq: $proposalId } }
-      order_by: { height: asc }
+      order_by: [{ height: asc }, { voter_address: asc }, { option: asc }]
       limit: $limit
       offset: $offset
     ) {
@@ -401,11 +401,6 @@ export const PROPOSAL_VOTES_QUERY = `
       height
       timestamp
       weight
-    }
-    proposal_vote_aggregate(where: { proposal_id: { _eq: $proposalId } }) {
-      aggregate {
-        count
-      }
     }
   }
 `;
@@ -417,7 +412,7 @@ export const PROPOSAL_VOTES_FILTERED_QUERY = `
         proposal_id: { _eq: $proposalId }
         option: { _eq: $option }
       }
-      order_by: { height: asc }
+      order_by: [{ height: asc }, { voter_address: asc }, { option: asc }]
       limit: $limit
       offset: $offset
     ) {
@@ -426,14 +421,6 @@ export const PROPOSAL_VOTES_FILTERED_QUERY = `
       height
       timestamp
       weight
-    }
-    proposal_vote_aggregate(where: {
-      proposal_id: { _eq: $proposalId }
-      option: { _eq: $option }
-    }) {
-      aggregate {
-        count
-      }
     }
   }
 `;
