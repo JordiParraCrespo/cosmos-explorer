@@ -178,7 +178,11 @@ migrate:
 ###############################################################################
 
 setup-env:
-	@command -v openssl >/dev/null 2>&1 || { echo "Error: openssl is required"; exit 1; }; \
+	@if [ -f .env ] && grep -q '^HASURA_GRAPHQL_ADMIN_SECRET=.' .env; then \
+		echo "Keeping existing apps/callisto/.env"; \
+		exit 0; \
+	fi; \
+	command -v openssl >/dev/null 2>&1 || { echo "Error: openssl is required"; exit 1; }; \
 	ARCH=$$(uname -m); \
 	if [ "$$ARCH" = "arm64" ] || [ "$$ARCH" = "aarch64" ]; then \
 		HASURA_IMAGE_SUFFIX=.ubuntu.arm64; \
