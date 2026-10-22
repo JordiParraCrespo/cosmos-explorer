@@ -120,7 +120,7 @@ export class Fetcher {
     const headers = new Headers();
     const baseHeaders = this.headers instanceof Headers
       ? this.headers
-      : new Headers(this.headers as Record<string, string>);
+      : new Headers(this.headers);
 
     baseHeaders.forEach((value, key) => {
       headers.set(key, value);
@@ -129,7 +129,7 @@ export class Fetcher {
     if (extraHeaders) {
       const mergedHeaders = extraHeaders instanceof Headers
         ? extraHeaders
-        : new Headers(extraHeaders as Record<string, string>);
+        : new Headers(extraHeaders);
 
       mergedHeaders.forEach((value, key) => {
         headers.set(key, value);
