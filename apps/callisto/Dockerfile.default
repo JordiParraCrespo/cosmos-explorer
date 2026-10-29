@@ -1,12 +1,17 @@
-FROM golang:1.22-alpine AS builder
+# Build from the repository root so the local Juno package is available:
+#   docker build -f apps/callisto/Dockerfile.default .
+FROM golang:1.23.8-alpine AS builder
 RUN apk update && apk add --no-cache make git build-base gcc
 WORKDIR /go/src/github.com/forbole/callisto
-COPY . ./
+COPY go.work go.work.sum ./
+COPY packages/juno ./packages/juno
+COPY apps/callisto ./apps/callisto
+WORKDIR /go/src/github.com/forbole/callisto/apps/callisto
 RUN go mod download
 RUN make build
 
 FROM alpine:latest
 WORKDIR /callisto
-COPY --from=builder /go/src/github.com/forbole/callisto/build/callisto /usr/bin/callisto
+COPY --from=builder /go/src/github.com/forbole/callisto/apps/callisto/build/callisto /usr/bin/callisto
 EXPOSE 3000
 CMD [ "callisto" ]
