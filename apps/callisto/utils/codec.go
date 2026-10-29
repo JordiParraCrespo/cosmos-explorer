@@ -40,7 +40,7 @@ import (
 	ibctransfer "github.com/cosmos/ibc-go/v10/modules/apps/transfer"
 	ibc "github.com/cosmos/ibc-go/v10/modules/core"
 	ibctm "github.com/cosmos/ibc-go/v10/modules/light-clients/07-tendermint"
-	"github.com/xrplevm/node/v9/x/poa"
+	"github.com/xrplevm/node/v10/x/poa"
 )
 
 var once sync.Once
