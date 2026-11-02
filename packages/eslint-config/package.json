@@ -9,11 +9,11 @@
     "./next": "./next.js"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^8",
-    "@typescript-eslint/parser": "^8",
-    "eslint-plugin-react-hooks": "^5",
-    "@next/eslint-plugin-next": "^15",
-    "globals": "^15"
+    "@next/eslint-plugin-next": "^16.4.2",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^15.15.0"
   },
   "peerDependencies": {
     "eslint": "^9",

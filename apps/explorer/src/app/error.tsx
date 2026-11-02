@@ -1,7 +1,6 @@
 "use client";
 
 import { ErrorState } from "@cosmos-explorer/ui";
-import type { AppError } from "@cosmos-explorer/core";
 
 export default function PageError({
   error,
@@ -12,7 +11,7 @@ export default function PageError({
 }) {
   return (
     <div className="flex items-center justify-center py-20">
-      <ErrorState error={error as AppError} onRetry={reset} />
+      <ErrorState error={error} onRetry={reset} />
     </div>
   );
 }

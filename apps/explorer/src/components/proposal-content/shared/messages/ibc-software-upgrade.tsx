@@ -2,7 +2,7 @@ import type { ContentMessage } from "../message-helpers";
 import { MessageRow, AddressValue } from "./shared";
 
 export function IbcSoftwareUpgradeMessage({ msg }: { msg: ContentMessage }) {
-  const plan = msg.plan as { name?: string; height?: string } | undefined;
+  const plan = msg.plan;
   const signer = (msg.signer ?? msg.authority) as string | undefined;
 
   return (
