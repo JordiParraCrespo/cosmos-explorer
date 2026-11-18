@@ -12,7 +12,7 @@ require (
 	cosmossdk.io/x/upgrade v0.2.0
 	github.com/cometbft/cometbft v0.38.26
 	github.com/cosmos/cosmos-sdk v0.53.6
-	github.com/cosmos/evm v0.4.0
+	github.com/cosmos/evm v0.6.0
 	github.com/cosmos/gogoproto v1.7.2
 
 	// Scheduling
@@ -40,7 +40,7 @@ require (
 	github.com/xrplevm/cosmos-explorer/packages/juno v0.0.0-00010101000000-000000000000
 
 	// XRPL EVM
-	github.com/xrplevm/node/v9 v9.0.0
+	github.com/xrplevm/node/v10 v10.2.1
 
 	// Networking
 	google.golang.org/grpc v1.83.2
@@ -51,7 +51,7 @@ require (
 
 require (
 	github.com/cosmos/ibc-apps/modules/rate-limiting/v10 v10.1.0
-	github.com/cosmos/ibc-go/v10 v10.3.0
+	github.com/cosmos/ibc-go/v10 v10.3.1-0.20250909102629-ed3b125c7b6f
 )
 
 require (
@@ -313,7 +313,7 @@ replace (
 	// fix cosmos-sdk store path mismatch
 	github.com/cosmos/cosmos-sdk/store => cosmossdk.io/store v1.1.2
 	// use exrpd cosmos/evm fork
-	github.com/cosmos/evm => github.com/xrplevm/evm v0.4.2-xrplevm.2
+	github.com/cosmos/evm => github.com/xrplevm/evm v0.6.4-xrplevm.2
 	// use Cosmos geth fork
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v0.0.0-20250806193535-2fc7571efa91
 	// Security Advisory https://github.com/advisories/GHSA-h395-qcrw-5vmq
