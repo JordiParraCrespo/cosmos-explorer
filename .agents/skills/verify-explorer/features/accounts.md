@@ -1,11 +1,12 @@
 # Accounts
 
-An address's balances, delegations, rewards and unbonding.
+An address's balances, delegations, rewards, unbonding and recent
+transactions.
 
 ## Sub-features
 
 - Balances, Delegated and Rewards cards; Account Details (withdraw address,
-  unbonding); Balances and Delegations tables.
+  unbonding); Balances, Delegations and Recent Transactions tables.
 
 ## How to get to it (user POV)
 
@@ -27,6 +28,3 @@ wrong`).
   not an "invalid address" state. Drive real addresses taken from links;
   never type one by hand.
 - Transaction pages link EVM-style `0x…` accounts as well as `ethm1…`.
-- The loading skeleton (`loading.tsx`) draws a `Recent Transactions` card
-  the finished page never renders, so a section appears and then goes.
-  Read the page after `Balances` shows, not while it loads.
