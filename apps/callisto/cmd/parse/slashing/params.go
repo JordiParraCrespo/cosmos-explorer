@@ -3,13 +3,13 @@ package slashing
 import (
 	"github.com/spf13/cobra"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/types/config"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/database"
-	"github.com/forbole/callisto/v4/modules/slashing"
-	modulestypes "github.com/forbole/callisto/v4/modules/types"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/slashing"
+	modulestypes "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 func paramsCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {

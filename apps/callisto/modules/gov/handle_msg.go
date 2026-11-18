@@ -7,15 +7,15 @@ import (
 
 	"google.golang.org/grpc/codes"
 
-	"github.com/forbole/callisto/v4/types"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	govtypesv1beta1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
 
-	juno "github.com/forbole/juno/v6/types"
+	juno "github.com/xrplevm/cosmos-explorer/packages/juno/types"
 )
 
 var msgFilter = map[string]bool{

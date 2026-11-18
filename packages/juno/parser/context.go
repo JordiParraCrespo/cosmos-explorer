@@ -1,11 +1,11 @@
 package parser
 
 import (
-	"github.com/forbole/juno/v6/logging"
-	"github.com/forbole/juno/v6/node"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/logging"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node"
 
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/modules"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules"
 )
 
 // Context represents the context that is shared among different workers

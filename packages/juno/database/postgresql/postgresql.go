@@ -9,15 +9,15 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	"github.com/forbole/juno/v6/logging"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/logging"
 
 	"github.com/lib/pq"
 
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/types"
-	"github.com/forbole/juno/v6/types/config"
-	"github.com/forbole/juno/v6/types/env"
-	"github.com/forbole/juno/v6/types/utils"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/env"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/utils"
 )
 
 // Builder creates a database connection with the given database connection info

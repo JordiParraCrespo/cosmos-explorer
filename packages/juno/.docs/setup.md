@@ -8,7 +8,8 @@ Setting up Juno is pretty straightforward. It requires three things to be done:
 In order to install Juno you are required to have [Go 1.21+](https://golang.org/dl/) installed on your machine. Once you have it, the first thing to do is to clone the GitHub repository. To do this you can run
 
 ```shell
-$ git clone https://github.com/forbole/juno.git
+$ git clone https://github.com/xrplevm/cosmos-explorer.git
+$ cd cosmos-explorer/packages/juno
 ```
 
 Then, you need to install the binary. To do this, run

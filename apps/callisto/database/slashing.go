@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/forbole/callisto/v4/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 )
 
 // SaveValidatorsSigningInfos saves the given infos inside the database

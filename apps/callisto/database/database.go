@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	codec "github.com/cosmos/cosmos-sdk/codec"
-	db "github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/database/postgresql"
 	"github.com/jmoiron/sqlx"
+	db "github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database/postgresql"
 )
 
 var _ db.Database = &Db{}

@@ -1,9 +1,9 @@
 package messages
 
 import (
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/modules"
-	"github.com/forbole/juno/v6/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types"
 )
 
 var _ modules.Module = &Module{}

@@ -1,12 +1,12 @@
 package config
 
 import (
-	initcmd "github.com/forbole/juno/v6/cmd/init"
-	junoconfig "github.com/forbole/juno/v6/types/config"
 	"github.com/spf13/cobra"
+	initcmd "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/init"
+	junoconfig "github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 	"gopkg.in/yaml.v3"
 
-	"github.com/forbole/callisto/v4/modules/actions"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/actions"
 )
 
 // Config represents the Callisto configuration

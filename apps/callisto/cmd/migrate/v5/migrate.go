@@ -3,12 +3,12 @@ package v5
 import (
 	"fmt"
 
-	parse "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/database/postgresql"
-	"github.com/forbole/juno/v6/types/config"
+	parse "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database/postgresql"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	v5db "github.com/forbole/callisto/v4/database/migrate/v5"
+	v5db "github.com/xrplevm/cosmos-explorer/apps/callisto/database/migrate/v5"
 )
 
 // RunMigration runs the migrations to v5

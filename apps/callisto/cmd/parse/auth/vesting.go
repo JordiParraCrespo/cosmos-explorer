@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/types/config"
 	"github.com/spf13/cobra"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/database"
-	authutils "github.com/forbole/callisto/v4/modules/auth"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
+	authutils "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/auth"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 // vestingCmd returns a Cobra command that allows to fix the vesting data for the accounts

@@ -3,15 +3,15 @@ package blocks
 import (
 	"fmt"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/types/utils"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/utils"
 
 	"github.com/rs/zerolog/log"
 
 	"github.com/spf13/cobra"
 
-	"github.com/forbole/juno/v6/parser"
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/parser"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 )
 
 const (

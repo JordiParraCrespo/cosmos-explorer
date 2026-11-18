@@ -3,9 +3,9 @@ package database
 import (
 	"fmt"
 
-	dbtypes "github.com/forbole/callisto/v4/database/types"
+	dbtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/database/types"
 
-	"github.com/forbole/callisto/v4/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 
 	"github.com/lib/pq"
 )

@@ -7,20 +7,20 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	modulestypes "github.com/forbole/callisto/v4/modules/types"
+	modulestypes "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/types"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/parser"
-	"github.com/forbole/juno/v6/types/config"
 	"github.com/spf13/cobra"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/parser"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/database"
-	"github.com/forbole/callisto/v4/modules/distribution"
-	"github.com/forbole/callisto/v4/modules/gov"
-	"github.com/forbole/callisto/v4/modules/mint"
-	"github.com/forbole/callisto/v4/modules/slashing"
-	"github.com/forbole/callisto/v4/modules/staking"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/distribution"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/gov"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/mint"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/slashing"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/staking"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 // proposalCmd returns the Cobra command allowing to fix all things related to a proposal

@@ -7,7 +7,7 @@ import (
 	authttypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/callisto/v4/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 )
 
 // GetGenesisAccounts parses the given appState and returns the genesis accounts

@@ -1,9 +1,9 @@
 package v3
 
 import (
-	v3 "github.com/forbole/juno/v6/cmd/migrate/v3"
+	v3 "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/migrate/v3"
 
-	"github.com/forbole/callisto/v4/modules/actions"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/actions"
 )
 
 type Config struct {

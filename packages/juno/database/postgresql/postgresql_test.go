@@ -10,10 +10,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/forbole/juno/v6/database"
-	databaseconfig "github.com/forbole/juno/v6/database/config"
-	postgres "github.com/forbole/juno/v6/database/postgresql"
-	"github.com/forbole/juno/v6/logging"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	databaseconfig "github.com/xrplevm/cosmos-explorer/packages/juno/database/config"
+	postgres "github.com/xrplevm/cosmos-explorer/packages/juno/database/postgresql"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/logging"
 )
 
 func TestDatabaseTestSuite(t *testing.T) {

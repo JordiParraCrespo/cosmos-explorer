@@ -1,8 +1,8 @@
 package telemetry
 
 import (
-	"github.com/forbole/juno/v6/modules"
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 )
 
 const (

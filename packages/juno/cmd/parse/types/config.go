@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
 	"github.com/spf13/cobra"
 
-	"github.com/forbole/juno/v6/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types"
 )
 
 // ReadConfigPreRunE represents a Cobra cmd function allowing to read the config before executing the command itself

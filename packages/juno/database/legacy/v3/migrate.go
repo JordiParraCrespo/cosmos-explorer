@@ -6,9 +6,9 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	types "github.com/forbole/juno/v6/database/migrate/utils"
+	types "github.com/xrplevm/cosmos-explorer/packages/juno/database/migrate/utils"
 )
 
 // Migrate implements database.Migrator

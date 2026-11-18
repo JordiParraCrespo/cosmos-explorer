@@ -5,10 +5,10 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	databaseconfig "github.com/forbole/juno/v6/database/config"
-	loggingconfig "github.com/forbole/juno/v6/logging/config"
-	nodeconfig "github.com/forbole/juno/v6/node/config"
-	parserconfig "github.com/forbole/juno/v6/parser/config"
+	databaseconfig "github.com/xrplevm/cosmos-explorer/packages/juno/database/config"
+	loggingconfig "github.com/xrplevm/cosmos-explorer/packages/juno/logging/config"
+	nodeconfig "github.com/xrplevm/cosmos-explorer/packages/juno/node/config"
+	parserconfig "github.com/xrplevm/cosmos-explorer/packages/juno/parser/config"
 )
 
 var (

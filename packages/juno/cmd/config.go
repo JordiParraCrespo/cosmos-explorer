@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	initcmd "github.com/forbole/juno/v6/cmd/init"
-	parsecmd "github.com/forbole/juno/v6/cmd/parse/types"
+	initcmd "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/init"
+	parsecmd "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 )
 
 // Config represents the general configuration for the commands

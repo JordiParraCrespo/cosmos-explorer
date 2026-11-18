@@ -1,11 +1,11 @@
 package database
 
 import (
-	"github.com/forbole/juno/v6/logging"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/logging"
 
-	databaseconfig "github.com/forbole/juno/v6/database/config"
+	databaseconfig "github.com/xrplevm/cosmos-explorer/packages/juno/database/config"
 
-	"github.com/forbole/juno/v6/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types"
 )
 
 // Database represents an abstract database that can be used to save data inside it

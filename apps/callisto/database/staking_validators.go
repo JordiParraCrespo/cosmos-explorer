@@ -3,9 +3,9 @@ package database
 import (
 	"fmt"
 
-	"github.com/forbole/callisto/v4/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 
-	dbtypes "github.com/forbole/callisto/v4/database/types"
+	dbtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/database/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"

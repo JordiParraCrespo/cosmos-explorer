@@ -3,7 +3,7 @@ package utils_test
 import (
 	"testing"
 
-	"github.com/forbole/callisto/v4/modules/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/utils"
 
 	"github.com/stretchr/testify/require"
 )

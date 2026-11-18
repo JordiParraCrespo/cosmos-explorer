@@ -3,11 +3,11 @@ package parse
 import (
 	"github.com/spf13/cobra"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 
-	parseblocks "github.com/forbole/juno/v6/cmd/parse/blocks"
-	parsegenesis "github.com/forbole/juno/v6/cmd/parse/genesis"
-	parsetransactions "github.com/forbole/juno/v6/cmd/parse/transactions"
+	parseblocks "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/blocks"
+	parsegenesis "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/genesis"
+	parsetransactions "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/transactions"
 )
 
 // NewParseCmd returns the Cobra command allowing to parse some chain data without having to re-sync the whole database

@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/evm/encoding"
 	"github.com/cosmos/evm/x/erc20"
-	evmconfig "github.com/forbole/callisto/v4/types/evm_config"
+	evmconfig "github.com/xrplevm/cosmos-explorer/apps/callisto/types/evm_config"
 
 	"cosmossdk.io/x/evidence"
 	feegrantmodule "cosmossdk.io/x/feegrant/module"

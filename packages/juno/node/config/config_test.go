@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 
-	nodeconfig "github.com/forbole/juno/v6/node/config"
-	"github.com/forbole/juno/v6/node/local"
-	"github.com/forbole/juno/v6/node/remote"
+	nodeconfig "github.com/xrplevm/cosmos-explorer/packages/juno/node/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/local"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/remote"
 )
 
 func TestConfig_UnmarshalYAML(t *testing.T) {

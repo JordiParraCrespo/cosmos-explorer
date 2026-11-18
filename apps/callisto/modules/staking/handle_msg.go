@@ -6,9 +6,9 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/rs/zerolog/log"
 
-	juno "github.com/forbole/juno/v6/types"
+	juno "github.com/xrplevm/cosmos-explorer/packages/juno/types"
 
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 var msgFilter = map[string]bool{

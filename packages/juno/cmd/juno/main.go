@@ -3,12 +3,12 @@ package main
 import (
 	"os"
 
-	"github.com/forbole/juno/v6/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 
-	"github.com/forbole/juno/v6/modules/messages"
-	"github.com/forbole/juno/v6/modules/registrar"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules/messages"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules/registrar"
 
-	"github.com/forbole/juno/v6/cmd"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/cmd"
 )
 
 func main() {

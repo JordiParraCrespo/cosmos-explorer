@@ -6,10 +6,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	"github.com/forbole/juno/v6/node/remote"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/remote"
 
-	bankkeeper "github.com/forbole/callisto/v4/modules/bank/source"
-	"github.com/forbole/callisto/v4/types"
+	bankkeeper "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/bank/source"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 )
 
 var (

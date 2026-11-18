@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	coretypes "github.com/cometbft/cometbft/rpc/core/types"
-	"github.com/forbole/juno/v6/node"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node"
 )
 
 // QueryTxs queries all the transactions from the given node corresponding to the given query

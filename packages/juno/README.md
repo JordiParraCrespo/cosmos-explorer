@@ -4,9 +4,9 @@
 
 ![banner](.docs/.img/logo.png)
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/desmos-labs/juno/Tests)](https://github.com/forbole/juno/actions?query=workflow%3ATests)
-[![Go Report Card](https://goreportcard.com/badge/github.com/forbole/juno)](https://goreportcard.com/report/github.com/forbole/juno)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/forbole/juno)
+> This is the in-repo copy of Juno used by `apps/callisto`. It is imported as the Go module
+> `github.com/xrplevm/cosmos-explorer/packages/juno` and was originally forked from
+> [forbole/juno](https://github.com/forbole/juno) v6.
 
 > Juno is a Cosmos Hub blockchain data aggregator and exporter that provides the ability for developers and clients to query for indexed chain data.
 

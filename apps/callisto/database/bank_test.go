@@ -4,9 +4,9 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	dbtypes "github.com/forbole/callisto/v4/database/types"
+	dbtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/database/types"
 
-	bddbtypes "github.com/forbole/callisto/v4/database/types"
+	bddbtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/database/types"
 )
 
 func (suite *DbTestSuite) TestBigDipperDb_SaveSupply() {

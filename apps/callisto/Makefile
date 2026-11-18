@@ -14,8 +14,8 @@ all: lint build test-unit
 ###                                Build flags                              ###
 ###############################################################################
 
-LD_FLAGS = -X github.com/forbole/juno/v6/cmd.Version=$(VERSION) \
-	-X github.com/forbole/juno/v6/cmd.Commit=$(COMMIT)
+LD_FLAGS = -X github.com/xrplevm/cosmos-explorer/packages/juno/cmd.Version=$(VERSION) \
+	-X github.com/xrplevm/cosmos-explorer/packages/juno/cmd.Commit=$(COMMIT)
 BUILD_FLAGS :=  -ldflags '$(LD_FLAGS)'
 
 ifeq ($(LINK_STATICALLY),true)
@@ -85,7 +85,7 @@ lint-fix:
 format:
 	find . -name '*.go' -type f -not -path "*.git*" -not -name '*.pb.go' -not -name '*_mocks.go' | xargs gofmt -w -s
 	find . -name '*.go' -type f -not -path "*.git*" -not -name '*.pb.go' -not -name '*_mocks.go' | xargs misspell -w
-	find . -name '*.go' -type f -not -path "*.git*" -not -name '*.pb.go' -not -name '*_mocks.go' | xargs goimports -w -local github.com/forbole/callisto
+	find . -name '*.go' -type f -not -path "*.git*" -not -name '*.pb.go' -not -name '*_mocks.go' | xargs goimports -w -local github.com/xrplevm/cosmos-explorer/apps/callisto
 .PHONY: format
 
 clean:

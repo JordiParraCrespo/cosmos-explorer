@@ -1,10 +1,10 @@
 package modules
 
 import (
-	"github.com/forbole/juno/v6/modules"
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/database"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
 )
 
 var (
