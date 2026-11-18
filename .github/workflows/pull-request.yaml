@@ -131,6 +131,12 @@ jobs:
         with:
           go-version-file: apps/callisto/go.mod
 
+      # The TypeScript build skips the Go packages, so build both binaries here
+      # with their own Makefile recipes.
+      - name: Build juno
+        working-directory: packages/juno
+        run: make build
+
       - name: Build callisto
         working-directory: apps/callisto
         run: make build
