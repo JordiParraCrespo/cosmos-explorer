@@ -72,7 +72,7 @@ Prerequisites:
 
 - Node.js 22+
 - pnpm 9+
-- Go 1.23+ (for Go packages)
+- Go 1.26.11+ (for Go packages)
 - golangci-lint (for Go linting)
 
 ```bash

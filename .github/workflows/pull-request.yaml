@@ -39,7 +39,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version-file: apps/callisto/go.mod
 
       - name: Compute diff
         uses: technote-space/get-diff-action@v6.1.2
@@ -102,7 +102,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.23"
+          go-version-file: apps/callisto/go.mod
 
       - name: Compute diff
         uses: technote-space/get-diff-action@v6.1.2
