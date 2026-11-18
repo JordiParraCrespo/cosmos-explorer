@@ -39,8 +39,9 @@ require (
 	// Juno (local monorepo package: packages/juno)
 	github.com/xrplevm/cosmos-explorer/packages/juno v0.0.0-00010101000000-000000000000
 
-	// XRPL EVM
-	github.com/xrplevm/node/v10 v10.2.1
+	// XRPL EVM: node v11.3.0 (commit 3ee4692c). The v11 tags still declare the
+	// module as node/v10, so Go can only resolve them as a v10 pseudo-version.
+	github.com/xrplevm/node/v10 v10.0.4-0.20261026172816-3ee4692cf241
 
 	// Networking
 	google.golang.org/grpc v1.83.2
@@ -51,7 +52,7 @@ require (
 
 require (
 	github.com/cosmos/ibc-apps/modules/rate-limiting/v10 v10.1.0
-	github.com/cosmos/ibc-go/v10 v10.3.1-0.20250909102629-ed3b125c7b6f
+	github.com/cosmos/ibc-go/v10 v10.4.0
 )
 
 require (
@@ -312,7 +313,8 @@ replace (
 	github.com/cosmos/cosmos-sdk => github.com/xrplevm/cosmos-sdk v0.53.6-xrplevm.1
 	// fix cosmos-sdk store path mismatch
 	github.com/cosmos/cosmos-sdk/store => cosmossdk.io/store v1.1.2
-	// use exrpd cosmos/evm fork
+	// use exrpd cosmos/evm fork (node v11.3.0 pins a private hotfix fork of
+	// v0.6.4; this is the closest public fork, same proto types)
 	github.com/cosmos/evm => github.com/xrplevm/evm v0.6.4-xrplevm.2
 	// use Cosmos geth fork
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v0.0.0-20250806193535-2fc7571efa91
