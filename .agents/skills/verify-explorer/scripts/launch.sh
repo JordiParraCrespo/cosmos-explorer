@@ -24,8 +24,9 @@ APP="$ROOT/apps/explorer"
 STATE="${VERIFY_EXPLORER_DIR:-$ROOT/.verify-explorer}"
 RUN="$STATE/run"
 mkdir -p "$RUN"
+. "$(dirname "$0")/lib.sh"
 
-if [ -f "$RUN/pid" ] && kill -0 "$(cat "$RUN/pid")" 2>/dev/null; then
+if [ -f "$RUN/pid" ] && is_our_server "$(cat "$RUN/pid")"; then
   echo "launch: an instance this skill started is already running (pid $(cat "$RUN/pid"), $(cat "$RUN/network") on :$(cat "$RUN/port")). Run cleanup.sh first." >&2
   exit 1
 fi
@@ -34,10 +35,10 @@ if curl -s -o /dev/null --max-time 2 "http://127.0.0.1:$PORT/"; then
   exit 1
 fi
 
-if [ "$REUSE" = "--reuse" ] && [ "$(cat "$RUN/build-network" 2>/dev/null)" = "$NETWORK" ] &&
-  [ -f "$APP/.next/standalone/apps/explorer/server.js" ]; then
+if [ "$REUSE" = "--reuse" ] && reusable_build "$NETWORK" "$RUN" "$APP"; then
   echo "launch: reusing the $NETWORK build ($(cat "$APP/.next/BUILD_ID"))"
 else
+  [ "$REUSE" = "--reuse" ] && echo "launch: no $NETWORK build to reuse (.next was rebuilt or is for another network)"
   echo "launch: building the explorer for $NETWORK (log: $RUN/build.log)"
   (cd "$ROOT" && NETWORK="$NETWORK" pnpm turbo run build --filter=@cosmos-explorer/explorer >"$RUN/build.log" 2>&1) || {
     echo "launch: build failed; last lines of $RUN/build.log:" >&2
@@ -45,6 +46,7 @@ else
     exit 1
   }
   echo "$NETWORK" >"$RUN/build-network"
+  cp "$APP/.next/BUILD_ID" "$RUN/build-id"
 fi
 
 # The standalone server does not carry static assets or public/; the

@@ -36,8 +36,10 @@ with turbo, copies `static/` and `public/` into the standalone output as
 `docker/explorer.Dockerfile` does, and starts `server.js` on port 3100
 (`VERIFY_EXPLORER_PORT` to change it). The network is fixed at build time,
 since pages are prerendered for it, so one build serves one network.
-`--reuse` skips the build when the last one was for the same network; never
-reuse after changing source. Ready means the overview renders its heading,
+`--reuse` skips the build only when `.next` is still the build launch
+made for that network (same network, same `BUILD_ID`); anything that
+rebuilt `.next` since, such as a manual `pnpm build` for another network,
+forces a fresh build. Never reuse after changing source. Ready means the overview renders its heading,
 which on a cold start takes 10 to 20 seconds; the script waits up to two
 minutes and prints the server log if it gives up.
 
@@ -54,11 +56,14 @@ node .agents/skills/verify-explorer/scripts/doctor.mjs
 ```
 
 A read-only check that the instance is worth driving: the recorded server
-is alive, the build is for the network it serves, the overview renders,
-the network's RPC reports the chain id its config expects, the newest block
-the explorer lists is within 100 blocks of the chain head (a warning beyond
-that means the indexer lags, not the explorer), the server has logged no
-errors, and Playwright resolves. Run it before the first drive and again
+is alive, the build is for the network it serves and `.next` is still the
+build launch made (its `BUILD_ID`), the overview renders, the chain id the
+page itself prints in its footer is the one the network's config expects,
+the network's RPC reports that chain id too, the newest block the explorer
+lists is within 100 blocks of the chain head (a warning when it is further
+behind means the indexer lags; a block far *past* the head fails, because
+the data is another chain's), the server has logged no errors, and
+Playwright resolves. Run it before the first drive and again
 after any failed drive. Exit 1 means do not drive; fix or relaunch.
 
 ## 3. Drive
@@ -84,8 +89,10 @@ Every drive writes `.verify-explorer/evidence/<time>-<network>/` (git-
 ignored): a full-page screenshot per step at 1440px, a `failure`
 screenshot for a journey that failed, and `report.json` with each
 journey's status, final URL, duration and screenshots. Look at the
-screenshots that matter for the change before calling it verified: a pass
-proves the expected text appeared, not that the page looks right. Name
+screenshots that matter for the change before calling it verified. Each
+proof screenshot waits until no loading skeleton (`animate-pulse`) is left
+on the page, so it shows loaded data, but a pass still proves the expected
+text appeared, not that the page looks right. Name
 the evidence folder in the pull request, and attach the relevant pictures
 for a visible change.
 
@@ -96,7 +103,8 @@ for a visible change.
 ```
 
 Stops the server by the pid launch recorded, never by process name (the
-server renames itself `next-server`). Evidence is kept. Run it after the
+server renames itself `next-server`), and only after checking that the pid
+still is that server: a stale pid reused by another process is left alone. Evidence is kept. Run it after the
 last drive, and after a failed launch too.
 
 ## Reporting

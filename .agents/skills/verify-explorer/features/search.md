@@ -16,10 +16,15 @@ Type into the box in the header and press Enter.
 
 `search`: takes a real height from `/blocks`, a real hash from
 `/transactions` and a real address from a validator's page, searches each
-from `/`, and checks it lands on the matching detail page with its content
-(`Block Hash`, `Transaction Details`, `Balances`).
+from `/`, and checks it lands on the matching detail page with its loaded
+content: the searched `#<height>` and `Block Hash`, the searched hash under
+`Transaction Details`, the account's data.
 
 ## Gotchas
+
+- The block and transaction detail skeletons (`loading.tsx`) already draw
+  `Block Hash` and `Transaction Details`, so those labels alone prove
+  nothing; wait for the searched height or hash.
 
 - The block and transaction lists also have their own boxes (`Height or
   hash...`, `Search by tx hash...`); this journey covers the header one.

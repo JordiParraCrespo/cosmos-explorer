@@ -46,6 +46,13 @@ async function search(page, query, urlGlob) {
   await Promise.all([page.waitForURL(urlGlob), box.press("Enter")]);
 }
 const heading = (page, name) => page.getByRole("heading", { name }).first();
+/**
+ * The page past every loading.tsx and Suspense fallback. In this app
+ * `animate-pulse` is only used by those skeletons (the shared Skeleton and
+ * the widgets' own fallbacks), and they draw the same headings and labels as
+ * the loaded page, so a check on a label alone can pass on a skeleton.
+ */
+const settled = (page) => page.waitForFunction(() => !document.querySelector("main .animate-pulse"));
 const text = (page, pattern) => page.getByText(pattern).first();
 /** The account page past its loading.tsx skeleton: its address and data cards render. */
 async function accountLoaded(page, address) {
@@ -54,7 +61,7 @@ async function accountLoaded(page, address) {
   await loaded.or(failed).waitFor();
   assert(!(await failed.count()), "the account page shows the error boundary");
   await page.locator("main").getByText(address).first().waitFor();
-  await page.waitForFunction(() => !document.querySelector("main .animate-pulse"));
+  await settled(page);
 }
 
 const journeys = {
@@ -141,13 +148,17 @@ const journeys = {
     await page.goto(`${base}/blocks`);
     const height = (await page.locator('a[href^="/blocks/"]').first().getAttribute("href")).split("/").pop();
     await search(page, height, `**/blocks/${height}`);
+    // "Block Hash" is in the skeleton too; the height is not.
+    await text(page, `#${Number(height).toLocaleString("en-US")}`).waitFor();
     await text(page, "Block Hash").waitFor();
     await shot("by-height");
 
     await page.goto(`${base}/transactions`);
     const hash = (await page.locator('a[href^="/transactions/"]').first().getAttribute("href")).split("/").pop();
     await search(page, hash, `**/transactions/${hash}`);
+    // "Transaction Details" is in the skeleton too; the hash is not.
     await heading(page, "Transaction Details").waitFor();
+    await page.locator("main").getByText(hash).first().waitFor();
     await shot("by-tx-hash");
 
     await page.goto(`${base}/validators`);
@@ -185,7 +196,10 @@ for (const name of names) {
   page.on("pageerror", (error) => pageErrors.push(error.message));
   const logBefore = serverLog().length;
   const shots = [];
-  const shot = async (step) => {
+  // Every proof screenshot waits for the page to finish loading; the failure
+  // screenshot takes the page as it is, which is what it has to show.
+  const shot = async (step, { settle = step !== "failure" } = {}) => {
+    if (settle) await settled(page);
     const file = join(evidence, `${name}-${step}.png`);
     await page.screenshot({ path: file, fullPage: true });
     shots.push(file);

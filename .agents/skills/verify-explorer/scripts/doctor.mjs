@@ -42,29 +42,42 @@ try {
   fail(`server pid ${pid} is gone; see ${join(run, "server.log")}`);
 }
 
-// 2. The build serves the network the run says it does.
+// 2. The build serves the network the run says it does, and is still the
+//    build launch.sh made: anything that rebuilt .next since changes BUILD_ID.
 const built = read("build-network");
 if (built === network) ok(`the build is for ${network}`);
 else fail(`the build is for ${built ?? "an unknown network"}, the server runs ${network}; relaunch`);
+const recordedBuild = read("build-id");
+const currentBuild = existsSync(join(root, "apps/explorer/.next/BUILD_ID"))
+  ? readFileSync(join(root, "apps/explorer/.next/BUILD_ID"), "utf8").trim()
+  : undefined;
+if (recordedBuild && recordedBuild === currentBuild) ok(`.next is still the build launch.sh made (${currentBuild})`);
+else fail(`.next has BUILD_ID ${currentBuild ?? "none"}, launch.sh recorded ${recordedBuild ?? "none"}: it was rebuilt since; relaunch`);
 
-// 3. The overview renders, from this server.
+const config = JSON.parse(
+  readFileSync(join(root, "apps/explorer/src/config", `chain.${network}.json`), "utf8"),
+);
+const expectedChainId = config.network.chainId;
+const rpc = config.network.endpoints.cosmosRpc;
+
+// 3. The overview renders, from this server, for the expected chain: the
+//    footer prints the chain id the build was made for, which no marker file
+//    can get wrong.
 const base = `http://127.0.0.1:${port}`;
 try {
   const res = await fetch(`${base}/`, { signal: AbortSignal.timeout(20_000) });
   const html = await res.text();
   if (res.ok && html.includes(">Overview</h1>")) ok(`GET / renders the overview (${res.status})`);
   else fail(`GET / answered ${res.status} without the overview heading`);
+  const served = html.match(/Chain ID:(?:<!-- -->)?\s*<span[^>]*>([^<]+)<\/span>/)?.[1];
+  if (served === expectedChainId) ok(`the page serves chain ${served}, as chain.${network}.json expects`);
+  else fail(`the page serves chain ${served ?? "(none found)"}, chain.${network}.json expects ${expectedChainId}: wrong build; relaunch`);
 } catch (error) {
   fail(`GET / failed: ${error.message}`);
 }
 
 // 4. The right chain, and fresh data: the newest block the explorer lists
 //    is close to the chain head its own config's Cosmos RPC reports.
-const config = JSON.parse(
-  readFileSync(join(root, "apps/explorer/src/config", `chain.${network}.json`), "utf8"),
-);
-const expectedChainId = config.network.chainId;
-const rpc = config.network.endpoints.cosmosRpc;
 try {
   const status = await (await fetch(`${rpc}/status`, { signal: AbortSignal.timeout(15_000) })).json();
   const chainId = status.result.node_info.network;
@@ -77,7 +90,9 @@ try {
   const newest = Math.max(...heights);
   const lag = head - newest;
   if (!heights.length) fail("/blocks lists no blocks");
-  else if (lag <= 100) ok(`/blocks lists height ${newest}, ${lag} behind the chain head ${head}`);
+  // A block well past the head cannot be this chain's: the data is another network's.
+  else if (lag < -100) fail(`/blocks lists height ${newest}, ${-lag} past the chain head ${head}: the data is another chain's`);
+  else if (lag <= 100) ok(`/blocks lists height ${newest}, ${Math.max(lag, 0)} behind the chain head ${head}`);
   else warn(`/blocks lists height ${newest}, ${lag} behind the chain head ${head}: the indexer is lagging`);
 } catch (error) {
   fail(`could not compare against the chain head at ${rpc}: ${error.message}`);
