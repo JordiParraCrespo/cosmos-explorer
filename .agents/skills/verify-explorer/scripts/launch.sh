@@ -21,8 +21,7 @@ esac
 
 ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 APP="$ROOT/apps/explorer"
-STATE="${VERIFY_EXPLORER_DIR:-$ROOT/.verify-explorer}"
-RUN="$STATE/run"
+RUN="$ROOT/.verify-explorer/run"
 mkdir -p "$RUN"
 
 if [ -f "$RUN/pid" ] && kill -0 "$(cat "$RUN/pid")" 2>/dev/null; then

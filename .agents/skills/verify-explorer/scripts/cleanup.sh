@@ -6,8 +6,7 @@
 set -euo pipefail
 
 ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
-STATE="${VERIFY_EXPLORER_DIR:-$ROOT/.verify-explorer}"
-RUN="$STATE/run"
+RUN="$ROOT/.verify-explorer/run"
 
 if [ -f "$RUN/pid" ]; then
   PID="$(cat "$RUN/pid")"
@@ -24,6 +23,6 @@ else
   echo "cleanup: nothing this skill started is running"
 fi
 
-if [ -d "$STATE/evidence" ]; then
-  echo "cleanup: evidence kept in $STATE/evidence/"
+if [ -d "$ROOT/.verify-explorer/evidence" ]; then
+  echo "cleanup: evidence kept in $ROOT/.verify-explorer/evidence/"
 fi
