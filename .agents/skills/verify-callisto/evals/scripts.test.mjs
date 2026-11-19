@@ -82,7 +82,8 @@ const server = createServer((req, res) => {
     return send({
       result: {
         block_id: { hash: b.hash },
-        block: { header: { height: String(h), time: b.time, proposer_address: PROPOSER_HEX }, data: { txs: b.txs } },
+        // CometBFT may encode an empty slice as null; serve it that way.
+        block: { header: { height: String(h), time: b.time, proposer_address: PROPOSER_HEX }, data: { txs: b.txs.length ? b.txs : null } },
       },
     });
   if (url.pathname === "/block_results" && b) return send({ result: { height: String(h), txs_results: b.results.length ? b.results : null } });
@@ -256,6 +257,23 @@ describe("check.mjs", () => {
     const r = await check();
     assert.equal(r.code, 1);
     assert.match(r.out, new RegExp(`1006: ${hash} is not in the database`));
+  });
+
+  test("waits for a block's transactions, not just its row", async () => {
+    // Juno saves the block row first; its transactions and messages follow.
+    const hash = txHash(chain.blocks.get(1006).txs[0]);
+    psql(`DELETE FROM message WHERE transaction_hash = '${hash}'; DELETE FROM transaction WHERE hash = '${hash}';`);
+    const pending = run("check.mjs", ["--follow", String(FOLLOW), "--timeout", "40"]);
+    await new Promise((r) => setTimeout(r, 4000));
+    psql(
+      `INSERT INTO transaction (hash, height, success, messages, signatures, gas_wanted, gas_used, partition_id) ` +
+        `VALUES ('${hash}', 1006, true, '[{"@type":"${MSG_TYPE}"}]', '{}', 200000, 100000, 0); ` +
+        `INSERT INTO message VALUES ('${hash}', 0, '${MSG_TYPE}', '{}', '{}', 0, 1006);`,
+    );
+    const r = await pending;
+    assert.equal(r.code, 0, r.out);
+    assert.match(r.out, /10\/10 blocks, 2\/3 transactions, 2\/2 messages indexed/);
+    assert.match(r.out, /10\/10 blocks, 3\/3 transactions, 3\/3 messages indexed/);
   });
 
   test("a failed transaction stored as successful fails", async () => {

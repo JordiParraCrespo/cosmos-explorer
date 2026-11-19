@@ -40,22 +40,40 @@ if (!Number.isInteger(follow) || follow < 1) {
 const launch = readLaunch();
 const target = launch.headAtLaunch + follow;
 const want = Array.from({ length: target - launch.start + 1 }, (_, i) => launch.start + i);
+// CometBFT encodes an empty slice as either [] or null.
+const txsOf = (block) => block.block.data.txs ?? [];
 const pid = existsSync(join(RUN, "pid")) ? Number(readFileSync(join(RUN, "pid"), "utf8")) : 0;
 
 // --- Wait for the window ------------------------------------------------------
 
-const indexedCount = () =>
-  Number(sql(`SELECT count(*) FROM block WHERE height BETWEEN ${launch.start} AND ${target}`)[0][0]);
+// Juno saves a block's row before its commits, handlers, transactions and
+// messages, so a block row alone does not mean the block is done. The range is
+// complete when every height has a row, every block has as many transaction
+// rows as its num_txs, and every transaction as many message rows as messages.
+function progress() {
+  const range = `BETWEEN ${launch.start} AND ${target}`;
+  const [[blocks, txsExpected]] = sql(`SELECT count(*), coalesce(sum(num_txs), 0) FROM block WHERE height ${range}`);
+  const [[txs, msgsExpected]] = sql(
+    `SELECT count(*), coalesce(sum(json_array_length(messages)), 0) FROM transaction WHERE height ${range}`,
+  );
+  const [[msgs]] = sql(`SELECT count(*) FROM message WHERE height ${range}`);
+  const n = (v) => Number(v);
+  return {
+    blocks: n(blocks),
+    done: n(blocks) >= want.length && n(txs) >= n(txsExpected) && n(msgs) >= n(msgsExpected),
+    summary: `${blocks}/${want.length} blocks, ${txs}/${txsExpected} transactions, ${msgs}/${msgsExpected} messages`,
+  };
+}
 
 if (!noWait) {
   const timeoutS = Number(flag("--timeout", Math.max(300, Math.ceil(want.length * launch.avgBlockTimeSeconds * 3))));
   const deadline = Date.now() + timeoutS * 1000;
-  let last = -1;
+  let last = "";
   for (;;) {
-    const n = indexedCount();
-    if (n !== last) console.log(`check: ${n}/${want.length} heights indexed (${launch.start}..${target})`);
-    last = n;
-    if (n >= want.length) break;
+    const p = progress();
+    if (p.summary !== last) console.log(`check: ${p.summary} indexed (${launch.start}..${target})`);
+    last = p.summary;
+    if (p.done) break;
     if (pid && !processAlive(pid)) {
       console.log("check: callisto has exited; checking what it indexed");
       break;
@@ -137,7 +155,7 @@ for (const h of present) {
   const totalGas = txr.reduce((sum, r) => sum + Number(r.gas_used ?? 0), 0);
   const diffs = [];
   if (db.hash !== block.block_id.hash) diffs.push(`hash ${db.hash} != ${block.block_id.hash}`);
-  if (db.numTxs !== block.block.data.txs.length) diffs.push(`num_txs ${db.numTxs} != ${block.block.data.txs.length}`);
+  if (db.numTxs !== txsOf(block).length) diffs.push(`num_txs ${db.numTxs} != ${txsOf(block).length}`);
   if (db.proposer !== proposer) diffs.push(`proposer ${db.proposer || "(none)"} != ${proposer}`);
   if (normalizeTs(db.ts) !== normalizeTs(header.time)) diffs.push(`timestamp ${db.ts} != ${header.time}`);
   if (db.totalGas !== totalGas) diffs.push(`total_gas ${db.totalGas} != ${totalGas}`);
@@ -153,7 +171,7 @@ let txTotal = 0;
 for (const h of present) {
   const { block, results: txr } = chain.get(h);
   const rows = dbTxs.get(h) ?? new Map();
-  const hashes = block.block.data.txs.map(txHash);
+  const hashes = txsOf(block).map(txHash);
   txTotal += hashes.length;
   hashes.forEach((hash, i) => {
     const row = rows.get(hash);

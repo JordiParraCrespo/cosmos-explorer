@@ -2,7 +2,11 @@
 # and RUN to be set.
 
 PG_PORT="${VERIFY_CALLISTO_PG_PORT:-6544}"
-PG_CONTAINER="verify-callisto-pg"
+# One container per run directory and port, so two runs (two checkouts, or the
+# evals beside a live run) never remove each other's database. pg_start
+# records it; the other functions use the recorded name.
+PG_CONTAINER="verify-callisto-pg-$PG_PORT-$(printf '%s' "$RUN" | cksum | cut -d' ' -f1)"
+pg_container() { cat "$RUN/pg-container" 2>/dev/null || echo "$PG_CONTAINER"; }
 
 # True when pid $1 is alive and is the callisto this skill started: its
 # command line is `callisto start --home <RUN>/home`. A recorded pid can
@@ -50,8 +54,10 @@ as_pg_user() {
 # apps/callisto/docker-compose.yml does; otherwise local server binaries.
 pg_start() {
   if docker_usable; then
+    # Only this run's own container from an earlier launch is replaced.
     docker rm -f "$PG_CONTAINER" >/dev/null 2>&1 || true
     echo docker >"$RUN/pg-mode"
+    echo "$PG_CONTAINER" >"$RUN/pg-container"
     docker run -d --name "$PG_CONTAINER" -p "127.0.0.1:$PG_PORT:5432" \
       -e POSTGRES_USER=callisto -e POSTGRES_PASSWORD=callisto -e POSTGRES_DB=callisto \
       postgres:17 >/dev/null || return 1
@@ -99,7 +105,7 @@ pg_psql() {
   local mode
   mode="$(cat "$RUN/pg-mode")"
   if [ "$mode" = docker ]; then
-    docker exec -i "$PG_CONTAINER" psql -X -q -v ON_ERROR_STOP=1 -U callisto -d callisto "$@"
+    docker exec -i "$(pg_container)" psql -X -q -v ON_ERROR_STOP=1 -U callisto -d callisto "$@"
   else
     psql -X -q -v ON_ERROR_STOP=1 -h 127.0.0.1 -p "$PG_PORT" -U callisto -d callisto "$@"
   fi
@@ -108,9 +114,9 @@ pg_psql() {
 pg_stop() {
   [ -f "$RUN/pg-mode" ] || return 0
   if [ "$(cat "$RUN/pg-mode")" = docker ]; then
-    docker rm -f "$PG_CONTAINER" >/dev/null 2>&1 || true
+    docker rm -f "$(pg_container)" >/dev/null 2>&1 || true
   elif [ -d "$RUN/pg/data" ]; then
     as_pg_user "$(cat "$RUN/pg-bindir")/pg_ctl" -D "$RUN/pg/data" -m fast stop >/dev/null 2>&1 || true
   fi
-  rm -f "$RUN/pg-mode" "$RUN/psql.json" "$RUN/db-url" "$RUN/pg-bindir"
+  rm -f "$RUN/pg-mode" "$RUN/psql.json" "$RUN/db-url" "$RUN/pg-bindir" "$RUN/pg-container"
 }
