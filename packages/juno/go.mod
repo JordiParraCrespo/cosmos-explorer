@@ -1,6 +1,8 @@
 module github.com/xrplevm/cosmos-explorer/packages/juno
 
-go 1.26.11
+go 1.26.0
+
+toolchain go1.26.11
 
 require (
 	cosmossdk.io/log v1.6.1
@@ -111,6 +113,7 @@ require (
 	github.com/mtibben/percent v0.2.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20230904125328-1f23a7beb09a // indirect
+	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/onsi/gomega v1.38.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/opencontainers/runc v1.1.13 // indirect
@@ -170,4 +173,15 @@ require (
 )
 
 // cosmos-sdk v0.53 still expects cosmossdk.io/core v0.11.x (matches apps/callisto)
-replace cosmossdk.io/core => cosmossdk.io/core v0.11.3
+replace (
+	// Keep these in step with apps/callisto/go.mod, so Juno builds and tests
+	// against the same graph standalone (GOWORK=off) as inside the workspace.
+	// cosmos-sdk v0.53 still expects cosmossdk.io/core v0.11.x
+	cosmossdk.io/core => cosmossdk.io/core v0.11.3
+	// use cosmos fork of keyring
+	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
+	// use the XRPL EVM Cosmos SDK fork the chain runs
+	github.com/cosmos/cosmos-sdk => github.com/xrplevm/cosmos-sdk v0.53.6-xrplevm.1
+	// replace broken goleveldb
+	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
+)

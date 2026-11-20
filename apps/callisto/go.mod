@@ -1,6 +1,8 @@
 module github.com/xrplevm/cosmos-explorer/apps/callisto
 
-go 1.26.11
+go 1.26.0
+
+toolchain go1.26.11
 
 require (
 	// Cosmos SDK
@@ -322,6 +324,7 @@ replace (
 	github.com/gin-gonic/gin => github.com/gin-gonic/gin v1.9.1
 	// replace broken goleveldb
 	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
-	// Juno lives in this monorepo; resolve it from the local package
+	// Juno lives in this monorepo; resolve it from the local package. Its go.mod
+	// repeats the replaces below that its own graph needs; keep them in step.
 	github.com/xrplevm/cosmos-explorer/packages/juno => ../../packages/juno
 )
