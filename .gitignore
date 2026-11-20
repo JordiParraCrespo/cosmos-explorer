@@ -7,3 +7,6 @@ next-env.d.ts
 *.tsbuildinfo
 .env
 .env*.local
+
+# verify-callisto skill: run state and evidence
+.verify-callisto/

@@ -42,3 +42,5 @@ For Go changes, run the narrowest relevant checks in `apps/callisto` or `package
 ## Verification
 
 Run focused checks first. Before handoff, report what ran and any checks that could not run. Never use destructive Git commands to discard unrelated work.
+
+For a change to the indexer (`apps/callisto`, `packages/juno`, their Go dependencies or toolchain, or `apps/callisto/configs`), also run the `verify-callisto` skill: it runs Callisto against a real network from a little behind the head, follows new blocks, and checks what it indexed against the chain's RPC. It needs network access to the RPC (HTTPS and WebSocket) and gRPC endpoints.
