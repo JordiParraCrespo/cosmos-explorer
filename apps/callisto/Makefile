@@ -78,9 +78,14 @@ lint:
 
 lint-fix:
 	@echo "--> Running linter"
-	@golangci-lint run --fix --out-format=tab --issues-exit-code=0
+	@golangci-lint run --fix --issues-exit-code=0
 
-.PHONY: lint lint-fix
+# Go's equivalent of the TypeScript packages' typecheck task (pnpm typecheck).
+typecheck:
+	@echo "--> Type-checking"
+	@go vet ./...
+
+.PHONY: lint lint-fix typecheck
 
 format:
 	find . -name '*.go' -type f -not -path "*.git*" -not -name '*.pb.go' -not -name '*_mocks.go' | xargs gofmt -w -s
