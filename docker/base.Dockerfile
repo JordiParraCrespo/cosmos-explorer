@@ -6,11 +6,12 @@ ENV TURBO_TEAM=$TURBO_TEAM
 WORKDIR /project
 RUN npm install -g pnpm@${PNPM_VERSION}
 
-# Install Go v1.23.8
+# Install Go. Keep GO_VERSION equal to the toolchain line in go.work.
+ARG GO_VERSION=1.26.11
 RUN apt-get update && apt-get install -y wget && \
-    wget https://go.dev/dl/go1.23.8.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go1.23.8.linux-amd64.tar.gz && \
-    rm go1.23.8.linux-amd64.tar.gz && \
+    wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
+    rm go${GO_VERSION}.linux-amd64.tar.gz && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Add Go to PATH

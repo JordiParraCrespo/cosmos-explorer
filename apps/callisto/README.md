@@ -4,7 +4,7 @@ Callisto is a blockchain indexer (formerly BDJuno) built on the Juno framework d
 
 ## Requirements
 
-- Go 1.23.8
+- Go 1.21+ (the `go` command downloads the toolchain pinned in the repository's `go.work`)
 - PostgreSQL 17 (provided by docker-compose)
 - Docker & Docker Compose
 - Hasura 2.6.1 (provided by docker-compose, auto-applies metadata via `cli-migrations-v3`)
@@ -13,11 +13,12 @@ Callisto is a blockchain indexer (formerly BDJuno) built on the Juno framework d
 
 ### 1. Install Go
 
-Using GVM (Go Version Manager):
+Install any Go 1.21 or newer. The repository pins the exact toolchain in
+`go.work` (its `toolchain` line), and the `go` command downloads and uses it
+automatically (with the default `GOTOOLCHAIN=auto`):
 
 ```bash
-gvm install go1.23.8
-gvm use go1.23.8
+go version   # run inside the repository: reports the pinned toolchain
 ```
 
 ### 2. Build
