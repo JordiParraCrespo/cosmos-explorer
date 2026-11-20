@@ -97,7 +97,15 @@ prints one line per check and exits 1 when any fails:
   transaction, which is where a decoding failure shows.
 - **no handler errors**: no module logged `error while handling` a block,
   transaction or message, grouped by module and message type.
-- **no other errors**: no periodic job, startup error or panic.
+- **no other errors**: no periodic job error or panic after the first block.
+- **no startup errors** (warning only): errors logged before launch saw the
+  first block of the window. On a fresh database Callisto logs a few, on
+  `main` as well: its consensus jobs run once at startup and find no block
+  (`no blocks saved`), and its first staking update runs on an empty
+  validator table. They are listed in the report but do not fail the run
+  until Callisto is fixed. The cut-off is launch's first sight of a block,
+  so an error within about a second of it can land on either side; an
+  error without a `time` field always counts.
 - **no retried blocks** (warning only): a block Juno had to re-enqueue,
   usually a rate-limited fetch; one that never made it fails coverage.
 - **module tables written**: each enabled module wrote the tables it

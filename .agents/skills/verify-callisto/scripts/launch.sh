@@ -67,6 +67,7 @@ START="$(node -p "require('$RUN/launch.json').start")"
 # Background callisto itself, not a subshell around it, so the recorded pid
 # is the indexer's and cleanup.sh stops what it means to.
 : >"$RUN/callisto.log"
+rm -f "$RUN/first-block-at"
 nohup "$APP/build/callisto" start --home "$RUN/home" >"$RUN/callisto.log" 2>&1 &
 echo $! >"$RUN/pid"
 
@@ -75,6 +76,8 @@ DEADLINE=$((SECONDS + 300))
 while [ "$SECONDS" -lt "$DEADLINE" ]; do
   N="$(pg_psql -At -c "SELECT count(*) FROM block WHERE height >= $START" 2>/dev/null || echo 0)"
   if [ "${N:-0}" -gt 0 ]; then
+    # check.mjs treats errors logged before this moment as startup noise.
+    date -u +%Y-%m-%dT%H:%M:%SZ >"$RUN/first-block-at"
     echo "launch: ready, $NETWORK indexing from $START (pid $(cat "$RUN/pid"), log $RUN/callisto.log)"
     exit 0
   fi
@@ -83,7 +86,7 @@ while [ "$SECONDS" -lt "$DEADLINE" ]; do
     tail -20 "$RUN/callisto.log" >&2
     exit 1
   fi
-  sleep 2
+  sleep 1
 done
 echo "launch: no block from the window was indexed within 300s; see $RUN/callisto.log" >&2
 exit 1

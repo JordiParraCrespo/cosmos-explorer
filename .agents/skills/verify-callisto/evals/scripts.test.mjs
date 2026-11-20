@@ -203,6 +203,7 @@ beforeEach(() => {
   writeLaunch();
   writeFileSync(join(RUN, "callisto.log"), LOG_OK);
   rmSync(join(RUN, "pid"), { force: true });
+  rmSync(join(RUN, "first-block-at"), { force: true });
 });
 
 // --- check.mjs -----------------------------------------------------------------------
@@ -311,6 +312,38 @@ describe("check.mjs", () => {
     assert.equal(r.code, 1);
     assert.match(lineOf(r.out, "no other errors"), /^FAIL/);
     assert.match(r.out, /1x panic/);
+  });
+
+  test("an error logged before the first block only warns; the same error after it fails", async () => {
+    // What Callisto's consensus jobs log at startup on a fresh database.
+    const line = (time) => `{"level":"error","error":"error while getting last block: no blocks saved","time":"${time}"}\n`;
+    writeFileSync(join(RUN, "first-block-at"), "2026-11-20T08:00:10Z\n");
+    writeFileSync(join(RUN, "callisto.log"), `${LOG_OK}${line("2026-11-20T08:00:05Z")}`);
+    let r = await check();
+    assert.equal(r.code, 0, r.out);
+    assert.match(lineOf(r.out, "no startup errors"), /^WARN/);
+    assert.match(r.out, /1x \(no message\): error while getting last block: no blocks saved/);
+    assert.match(lineOf(r.out, "no other errors"), /^PASS/);
+
+    writeFileSync(join(RUN, "callisto.log"), `${LOG_OK}${line("2026-11-20T08:00:15Z")}`);
+    r = await check();
+    assert.equal(r.code, 1);
+    assert.match(lineOf(r.out, "no other errors"), /^FAIL/);
+    assert.match(lineOf(r.out, "no startup errors"), /^PASS/);
+  });
+
+  test("an error without a time, or with no recorded first block, still fails", async () => {
+    writeFileSync(join(RUN, "first-block-at"), "2026-11-20T08:00:10Z\n");
+    writeFileSync(join(RUN, "callisto.log"), `${LOG_OK}{"level":"error","error":"boom"}\n`);
+    let r = await check();
+    assert.equal(r.code, 1);
+    assert.match(lineOf(r.out, "no other errors"), /^FAIL/);
+
+    rmSync(join(RUN, "first-block-at"));
+    writeFileSync(join(RUN, "callisto.log"), `${LOG_OK}{"level":"error","error":"boom","time":"2026-11-20T08:00:05Z"}\n`);
+    r = await check();
+    assert.equal(r.code, 1);
+    assert.match(lineOf(r.out, "no other errors"), /^FAIL/);
   });
 
   test("a retried block that was then indexed only warns", async () => {

@@ -202,6 +202,19 @@ const logLines = existsSync(join(RUN, "callisto.log")) ? readFileSync(join(RUN, 
 const handlerErrors = new Map();
 const retried = new Map();
 const otherErrors = new Map();
+// Errors logged before launch.sh saw the first block of the window. On a fresh
+// database Callisto's periodic jobs run once at startup and its first staking
+// update runs on an empty validator table; both log errors on main as well.
+// They are reported but do not fail the run. Without a first-block time, or
+// for a line without a time, every error counts.
+const startupErrors = new Map();
+const firstBlockAt = existsSync(join(RUN, "first-block-at"))
+  ? Date.parse(readFileSync(join(RUN, "first-block-at"), "utf8").trim())
+  : Number.NaN;
+const beforeFirstBlock = (e) => {
+  const t = Date.parse(e.time ?? "");
+  return Number.isFinite(firstBlockAt) && Number.isFinite(t) && t <= firstBlockAt;
+};
 const bump = (map, key, example) => {
   const e = map.get(key) ?? { count: 0, example };
   e.count += 1;
@@ -218,14 +231,16 @@ for (const line of logLines) {
   }
   if (e.level !== "error" && e.level !== "fatal") continue;
   const err = String(e.err ?? e.error ?? "").slice(0, 160);
-  if (String(e.message ?? "").startsWith("error while handling"))
+  if (beforeFirstBlock(e)) bump(startupErrors, `${e.message ?? "(no message)"}: ${err}`, line);
+  else if (String(e.message ?? "").startsWith("error while handling"))
     bump(handlerErrors, `${e.message} [module ${e.module ?? "?"}${e.msg_type ? `, ${e.msg_type}` : ""}]: ${err}`, line);
   else if (e.message === "re-enqueueing failed block") bump(retried, `height ${e.height}: ${err}`, line);
   else bump(otherErrors, `${e.message ?? "(no message)"}: ${err}`, line);
 }
 const fmt = (map) => [...map].map(([k, v]) => `${v.count}x ${k}`);
 record("no handler errors", fmt(handlerErrors), "no module failed on a block, transaction or message");
-record("no other errors", fmt(otherErrors), "no periodic job, startup or panic errors");
+record("no other errors", fmt(otherErrors), "no periodic job or panic errors after the first block");
+record("no startup errors", fmt(startupErrors), "nothing logged before the first block", { warnOnly: true });
 // A retried block that was then indexed is a transient fetch failure; one
 // that never made it shows up under coverage.
 record("no retried blocks", fmt(retried), "no block needed a retry", { warnOnly: true });
