@@ -1,10 +1,10 @@
 # Standalone callisto image. Build from the repository root so the local
 # packages/juno module (referenced via a replace directive) is available:
 # > docker build -f apps/callisto/Dockerfile.default -t callisto .
-FROM golang:1.26.11-alpine AS builder
+FROM golang:1.23.8-alpine AS builder
 RUN apk update && apk add --no-cache make git build-base gcc
 WORKDIR /go/src/github.com/xrplevm/cosmos-explorer
-COPY go.work ./
+COPY go.work go.work.sum ./
 COPY packages/juno ./packages/juno
 COPY apps/callisto ./apps/callisto
 WORKDIR /go/src/github.com/xrplevm/cosmos-explorer/apps/callisto
