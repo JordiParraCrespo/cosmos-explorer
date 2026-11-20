@@ -64,4 +64,4 @@ actions:
   host: 127.0.0.1
   port: 3000
 evm:
-  chain_id: 1440000
+  chain_id: 1449000
