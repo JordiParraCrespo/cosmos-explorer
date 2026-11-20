@@ -5,11 +5,11 @@ import (
 
 	feegranttypes "cosmossdk.io/x/feegrant"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	juno "github.com/forbole/juno/v6/types"
 	"github.com/rs/zerolog/log"
+	juno "github.com/xrplevm/cosmos-explorer/packages/juno/types"
 
-	"github.com/forbole/callisto/v4/types"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 var msgFilter = map[string]bool{

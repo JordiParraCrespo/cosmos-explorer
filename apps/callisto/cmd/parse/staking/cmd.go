@@ -1,8 +1,8 @@
 package staking
 
 import (
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
 	"github.com/spf13/cobra"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 )
 
 // NewStakingCmd returns the Cobra command that allows to fix all the things related to the x/staking module

@@ -1,14 +1,14 @@
 package v4
 
 import (
-	databaseconfig "github.com/forbole/juno/v6/database/config"
-	loggingconfig "github.com/forbole/juno/v6/logging/config"
-	"github.com/forbole/juno/v6/modules/pruning"
-	"github.com/forbole/juno/v6/modules/telemetry"
-	nodeconfig "github.com/forbole/juno/v6/node/config"
-	parserconfig "github.com/forbole/juno/v6/parser/config"
-	pricefeedconfig "github.com/forbole/juno/v6/pricefeed"
-	"github.com/forbole/juno/v6/types/config"
+	databaseconfig "github.com/xrplevm/cosmos-explorer/packages/juno/database/config"
+	loggingconfig "github.com/xrplevm/cosmos-explorer/packages/juno/logging/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules/pruning"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules/telemetry"
+	nodeconfig "github.com/xrplevm/cosmos-explorer/packages/juno/node/config"
+	parserconfig "github.com/xrplevm/cosmos-explorer/packages/juno/parser/config"
+	pricefeedconfig "github.com/xrplevm/cosmos-explorer/packages/juno/pricefeed"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 )
 
 // Config defines all necessary juno configuration parameters.

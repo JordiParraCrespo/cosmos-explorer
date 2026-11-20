@@ -255,4 +255,5 @@ image: hasura/graphql-engine:v2.6.1.cli-migrations-v3
 ## References
 
 - [Official Documentation](https://docs.bigdipper.live/cosmos-based/parser/overview/)
-- [GitHub Repository](https://github.com/forbole/callisto)
+- [GitHub Repository](https://github.com/xrplevm/cosmos-explorer) (`apps/callisto`)
+- [Upstream Callisto](https://github.com/forbole/callisto) (original fork source)

@@ -3,8 +3,8 @@ package v5
 import (
 	"fmt"
 
-	utils "github.com/forbole/callisto/v4/modules/utils"
-	"github.com/forbole/callisto/v4/types"
+	utils "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 )
 
 // Migrate implements database.Migrator

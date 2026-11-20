@@ -3,9 +3,9 @@ package types
 import (
 	"fmt"
 
-	"github.com/forbole/juno/v6/node"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node"
 
-	modulestypes "github.com/forbole/callisto/v4/modules/types"
+	modulestypes "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/types"
 )
 
 // Context contains the data about a Hasura actions worker execution

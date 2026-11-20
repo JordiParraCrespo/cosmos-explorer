@@ -1,11 +1,11 @@
 package daily_refetch
 
 import (
-	"github.com/forbole/juno/v6/node"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node"
 
-	callistodb "github.com/forbole/callisto/v4/database"
+	callistodb "github.com/xrplevm/cosmos-explorer/apps/callisto/database"
 
-	"github.com/forbole/juno/v6/modules"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules"
 )
 
 var (

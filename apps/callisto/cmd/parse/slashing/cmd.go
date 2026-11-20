@@ -1,8 +1,8 @@
 package slashing
 
 import (
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
 	"github.com/spf13/cobra"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 )
 
 // NewSlashingCmd returns the Cobra command allowing to fix various things related to the x/slashing module

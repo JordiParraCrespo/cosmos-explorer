@@ -3,14 +3,14 @@ package staking
 import (
 	"fmt"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/types/config"
 	"github.com/spf13/cobra"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/database"
-	"github.com/forbole/callisto/v4/modules/staking"
-	modulestypes "github.com/forbole/callisto/v4/modules/types"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/staking"
+	modulestypes "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 // poolCmd returns the Cobra command allowing to refresh x/staking pool

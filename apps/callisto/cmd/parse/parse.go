@@ -1,24 +1,24 @@
 package parse
 
 import (
-	parse "github.com/forbole/juno/v6/cmd/parse/types"
 	"github.com/spf13/cobra"
+	parse "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
 
-	parseblocks "github.com/forbole/juno/v6/cmd/parse/blocks"
+	parseblocks "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/blocks"
 
-	parsegenesis "github.com/forbole/juno/v6/cmd/parse/genesis"
+	parsegenesis "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/genesis"
 
-	parsetransaction "github.com/forbole/juno/v6/cmd/parse/transactions"
+	parsetransaction "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/transactions"
 
-	parseauth "github.com/forbole/callisto/v4/cmd/parse/auth"
-	parsebank "github.com/forbole/callisto/v4/cmd/parse/bank"
-	parsedistribution "github.com/forbole/callisto/v4/cmd/parse/distribution"
-	parsefeegrant "github.com/forbole/callisto/v4/cmd/parse/feegrant"
-	parsegov "github.com/forbole/callisto/v4/cmd/parse/gov"
-	parsemint "github.com/forbole/callisto/v4/cmd/parse/mint"
-	parsepricefeed "github.com/forbole/callisto/v4/cmd/parse/pricefeed"
-	parseslashing "github.com/forbole/callisto/v4/cmd/parse/slashing"
-	parsestaking "github.com/forbole/callisto/v4/cmd/parse/staking"
+	parseauth "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/auth"
+	parsebank "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/bank"
+	parsedistribution "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/distribution"
+	parsefeegrant "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/feegrant"
+	parsegov "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/gov"
+	parsemint "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/mint"
+	parsepricefeed "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/pricefeed"
+	parseslashing "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/slashing"
+	parsestaking "github.com/xrplevm/cosmos-explorer/apps/callisto/cmd/parse/staking"
 )
 
 // NewParseCmd returns the Cobra command allowing to parse some chain data without having to re-sync the whole database

@@ -6,8 +6,8 @@ import (
 
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	dbtypes "github.com/forbole/callisto/v4/database/types"
-	"github.com/forbole/callisto/v4/types"
+	dbtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/database/types"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 )
 
 // SaveStakingParams allows to store the given params into the database

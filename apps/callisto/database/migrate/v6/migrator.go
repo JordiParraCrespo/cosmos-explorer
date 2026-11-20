@@ -3,8 +3,8 @@ package v6
 import (
 	"github.com/jmoiron/sqlx"
 
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/database/postgresql"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database/postgresql"
 )
 
 var _ database.Migrator = &Migrator{}

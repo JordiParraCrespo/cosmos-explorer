@@ -3,9 +3,9 @@ package remote
 import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/forbole/juno/v6/node/remote"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/remote"
 
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 )
 
 // GetDelegationsWithPagination implements stakingsource.Source

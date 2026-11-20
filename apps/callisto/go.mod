@@ -1,4 +1,4 @@
-module github.com/forbole/callisto/v4
+module github.com/xrplevm/cosmos-explorer/apps/callisto
 
 go 1.23.8
 
@@ -14,9 +14,6 @@ require (
 	github.com/cosmos/cosmos-sdk v0.53.4
 	github.com/cosmos/evm v0.4.0
 	github.com/cosmos/gogoproto v1.7.0
-
-	// Callisto / Juno
-	github.com/forbole/juno/v6 v6.0.1
 
 	// Scheduling
 	github.com/go-co-op/gocron v1.37.0
@@ -41,6 +38,9 @@ require (
 
 	// Testing
 	github.com/stretchr/testify v1.10.0
+
+	// Juno (local monorepo package: packages/juno)
+	github.com/xrplevm/cosmos-explorer/packages/juno v0.0.0-00010101000000-000000000000
 
 	// XRPL EVM
 	github.com/xrplevm/node/v9 v9.0.0
@@ -443,4 +443,6 @@ replace (
 	github.com/gin-gonic/gin => github.com/gin-gonic/gin v1.9.1
 	// replace broken goleveldb
 	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
+	// Juno lives in this monorepo; resolve it from the local package
+	github.com/xrplevm/cosmos-explorer/packages/juno => ../../packages/juno
 )

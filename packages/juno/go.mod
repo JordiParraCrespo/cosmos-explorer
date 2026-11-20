@@ -1,4 +1,4 @@
-module github.com/forbole/juno/v6
+module github.com/xrplevm/cosmos-explorer/packages/juno
 
 go 1.21
 

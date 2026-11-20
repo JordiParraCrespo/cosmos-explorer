@@ -3,7 +3,7 @@ package upgrade
 import (
 	"fmt"
 
-	juno "github.com/forbole/juno/v6/types"
+	juno "github.com/xrplevm/cosmos-explorer/packages/juno/types"
 
 	tmctypes "github.com/cometbft/cometbft/rpc/core/types"
 )

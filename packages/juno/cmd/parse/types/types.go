@@ -1,12 +1,12 @@
 package types
 
 import (
-	"github.com/forbole/juno/v6/logging"
-	"github.com/forbole/juno/v6/types/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/logging"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/juno/v6/database"
-	"github.com/forbole/juno/v6/database/builder"
-	"github.com/forbole/juno/v6/modules/registrar"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/database/builder"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/modules/registrar"
 )
 
 // Config contains all the configuration for the "parse" command

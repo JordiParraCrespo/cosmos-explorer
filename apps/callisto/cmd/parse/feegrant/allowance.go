@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"sort"
 
-	parsecmdtypes "github.com/forbole/juno/v6/cmd/parse/types"
-	"github.com/forbole/juno/v6/types/config"
+	parsecmdtypes "github.com/xrplevm/cosmos-explorer/packages/juno/cmd/parse/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 
-	"github.com/forbole/callisto/v4/modules/feegrant"
-	"github.com/forbole/callisto/v4/utils"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/modules/feegrant"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/utils"
 
 	"github.com/spf13/cobra"
 
-	"github.com/forbole/callisto/v4/database"
+	"github.com/xrplevm/cosmos-explorer/apps/callisto/database"
 
 	tmctypes "github.com/cometbft/cometbft/rpc/core/types"
 

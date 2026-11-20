@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/forbole/juno/v6/types/config"
 	"github.com/stretchr/testify/require"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types/config"
 )
 
 func TestDefaultConfig(t *testing.T) {

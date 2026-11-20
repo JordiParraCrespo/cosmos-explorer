@@ -1,10 +1,10 @@
 package message_type
 
 import (
-	utils "github.com/forbole/callisto/v4/modules/utils"
-	msgtypes "github.com/forbole/callisto/v4/types"
+	utils "github.com/xrplevm/cosmos-explorer/apps/callisto/modules/utils"
+	msgtypes "github.com/xrplevm/cosmos-explorer/apps/callisto/types"
 
-	"github.com/forbole/juno/v6/types"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/types"
 )
 
 // HandleMsg represents a message handler that stores the given message inside the proper database table

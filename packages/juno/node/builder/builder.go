@@ -6,10 +6,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/forbole/juno/v6/node"
-	nodeconfig "github.com/forbole/juno/v6/node/config"
-	"github.com/forbole/juno/v6/node/local"
-	"github.com/forbole/juno/v6/node/remote"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node"
+	nodeconfig "github.com/xrplevm/cosmos-explorer/packages/juno/node/config"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/local"
+	"github.com/xrplevm/cosmos-explorer/packages/juno/node/remote"
 )
 
 func BuildNode(cfg nodeconfig.Config, txConfig client.TxConfig, codec codec.Codec) (node.Node, error) {
