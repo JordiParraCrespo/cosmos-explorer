@@ -89,7 +89,8 @@ jobs:
         run: pnpm build
 
       - name: Typecheck
-        run: pnpm typecheck
+        # Go packages are type-checked by the go-lint and go-test jobs, as for lint above.
+        run: pnpm turbo run typecheck --filter='!@cosmos-explorer/juno' --filter='!@cosmos-explorer/callisto-app'
 
   go-test:
     name: Go tests
